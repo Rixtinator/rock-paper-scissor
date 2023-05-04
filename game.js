@@ -15,10 +15,6 @@ function getComputerChoice() {
                 : computerChoice = "Oops, something went wrong."
 }
 
-getComputerChoice();
-console.log(randomNumber);
-console.log(computerChoice);
-
 /* Get input from player */
 
 let playerSelection = "";
@@ -29,14 +25,12 @@ function getInputPlayer() {
     return playerSelection;
 }
 
-console.log(playerSelection);
-
 /* A function that plays a single round of Rock Paper Scissors." */
 
 let gameResult = "";
 
 function playRound() {
-    return (playerSelection === computerChoice) ? gameResult = "You choose the same, try again."
+    return (playerSelection === computerChoice) ? gameResult = "You choose the same."
         : (playerSelection === "ROCK" && computerChoice === "PAPER") ? gameResult = "You lose! Paper beats Rock!"
             : (playerSelection === "ROCK" && computerChoice) === "SCISSOR" ? gameResult = "You win! Rock beats Scissor!"
                 : (playerSelection === "PAPER" && computerChoice === "ROCK") ? gameResult = "You win! Paper beats Rock!"
@@ -49,7 +43,10 @@ function playRound() {
 let i = 0;
 
 function game() {
+    getComputerChoice();
+    console.log(computerChoice);
     getInputPlayer();
+    console.log(playerSelection);
     playRound();
     console.log(playRound(gameResult));
 }
@@ -59,3 +56,4 @@ do {
     i++;
 }
 while (i < 5);
+
