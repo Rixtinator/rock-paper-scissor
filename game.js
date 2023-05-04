@@ -17,20 +17,11 @@ function getRandomNumber() {
 
 function getComputerChoice() {
     getRandomNumber();
-    if (randomNumber === 1) {
-        return computerChoice = 'Rock';
-    }
-    else if (randomNumber === 2) {
-        return computerChoice = "Paper";
-    }
-    else if (randomNumber === 3) {
-        return computerChoice = "Scissors";
-    }
-    else {
-        return computerChoice = "Something went wrong.";
-    }
+    return (randomNumber === 1) ? computerChoice = "Rock"
+        : (randomNumber === 2) ? computerChoice = "Paper"
+            : (randomNumber === 3) ? computerChoice = "Scissor"
+                : computerChoice = "Oops, something went wrong."
 }
-
 
 getComputerChoice();
 console.log(randomNumber);
