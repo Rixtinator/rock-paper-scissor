@@ -89,11 +89,16 @@ function game() {
 }
 
 /* Loop round 3 times */
-let i = 0;
 
 do {
     game();
-    ++i;
 }
-while (i < 3);
+while (playerScore < 3 && computerScore < 3);
+
+if (playerScore === 3) {
+    console.log("YOU WON")
+}
+else if (computerScore === 3) {
+    console.log("YOU LOSE")
+}
 
