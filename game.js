@@ -48,57 +48,51 @@ function playRound() {
     }
     else if (playerSelection === "ROCK" && computerChoice === "PAPER") {
         addComputerScore();
-        return gameResult = "You lose! Paper beats Rock!";
+        return gameResult = "You lose! The computer chose paper and paper wraps around rock.";
     }
     else if (playerSelection === "ROCK" && computerChoice === "SCISSOR") {
         addPlayerScore();
-        return gameResult = "You win! Rock beats Scissor!";
+        return gameResult = "You win! The computer chose scissor and rock crushes scissor.";
     }
     else if (playerSelection === "PAPER" && computerChoice === "ROCK") {
         addPlayerScore();
-        return gameResult = "You win! Paper beats Rock!";
+        return gameResult = "You win! The computer chose rock and paper wraps around rock.";
     }
     else if (playerSelection === "PAPER" && computerChoice === "SCISSOR") {
         addComputerScore();
-        return gameResult = "You lose! Scissor beats Paper!";
+        return gameResult = "You lose! The computer chose scissor and scissor cuts paper.";
     }
     else if (playerSelection === "SCISSOR" && computerChoice === "PAPER") {
         addPlayerScore();
-        return gameResult = "You win! Scissor beats Paper!";
+        return gameResult = "You win! The computer chose scissor and scissor cuts paper.";
     }
     else if (playerSelection === "SCISSOR" && computerChoice === "ROCK") {
         addComputerScore();
-        return gameResult = "You lose! Rock beats Scissor!";
+        return gameResult = "You lose! The computer chose rock and rock crushes scissor!";
     }
     else {
-        return gameResult = "Oops, something went wrong.";
+        return gameResult = "Please make a choice between rock, paper or scissor.";
     }
 }
 
-/* The game itself */
-
-function game() {
-    getComputerChoice();
-    console.log(computerChoice);
-    getInputPlayer();
-    console.log(playerSelection);
-    playRound();
-    console.log(gameResult);
-    console.log(playerScore);
-    console.log(computerScore);
-}
-
-/* Loop round 3 times */
+/* Play the game until the player or the computer has 3 points */
 
 do {
-    game();
+    getComputerChoice();
+    getInputPlayer();
+    playRound();
+    console.log(gameResult);
+    console.log('Your score is' + ' ' + playerScore);
+    console.log('The computer\'s score is' + ' ' + computerScore);
 }
 while (playerScore < 3 && computerScore < 3);
 
+/* Letting the user know who won the competition. */
+
 if (playerScore === 3) {
-    console.log("YOU WON")
+    console.log("YEAH YEAH YOU WON, I wish I could give you a confetti party on your screen but I still need to learn that.")
 }
 else if (computerScore === 3) {
-    console.log("YOU LOSE")
+    console.log("OH DAMN YOU LOSE, that's sad")
 }
 
