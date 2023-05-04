@@ -25,56 +25,57 @@ function getInputPlayer() {
     return playerSelection;
 }
 
-/* A function that plays a single round of Rock Paper Scissors." */
+/* Adding score to player or computer." */
+
+let playerScore = 0;
+let computerScore = 0;
+
+function addPlayerScore() {
+    ++playerScore;
+}
+
+function addComputerScore() {
+    ++computerScore;
+}
+
+/* A single round of Rock, Paper, Scissors." */
 
 let gameResult = "";
-let playerScore = 0;
 
 function playRound() {
     if (playerSelection === computerChoice) {
-        return gameResult = "You choose the same."
+        return gameResult = "You choose the same.";
     }
     else if (playerSelection === "ROCK" && computerChoice === "PAPER") {
-        return gameResult = "You lose! Paper beats Rock!"
+        addComputerScore();
+        return gameResult = "You lose! Paper beats Rock!";
     }
     else if (playerSelection === "ROCK" && computerChoice === "SCISSOR") {
-        return gameResult = "You win! Rock beats Scissor!"
+        addPlayerScore();
+        return gameResult = "You win! Rock beats Scissor!";
     }
     else if (playerSelection === "PAPER" && computerChoice === "ROCK") {
-        return gameResult = "You win! Paper beats Rock!"
+        addPlayerScore();
+        return gameResult = "You win! Paper beats Rock!";
     }
     else if (playerSelection === "PAPER" && computerChoice === "SCISSOR") {
-        return gameResult = "You lose! Scissor beats Paper!"
+        addComputerScore();
+        return gameResult = "You lose! Scissor beats Paper!";
     }
     else if (playerSelection === "SCISSOR" && computerChoice === "PAPER") {
-        return gameResult = "You win! Scissor beats Paper!"
+        addPlayerScore();
+        return gameResult = "You win! Scissor beats Paper!";
     }
     else if (playerSelection === "SCISSOR" && computerChoice === "ROCK") {
-        return gameResult = "You lose! Rock beats Scissor!"
+        addComputerScore();
+        return gameResult = "You lose! Rock beats Scissor!";
     }
     else {
-        return gameResult = "Oops, something went wrong."
+        return gameResult = "Oops, something went wrong.";
     }
 }
 
-/*
-function playRound() {
-                    : (playerSelection === "PAPER" && computerChoice === "SCISSOR") ? gameResult = "You lose! Scissor beats Paper!"
-                        : (playerSelection === "SCISSOR" && computerChoice === "PAPER") ? gameResult = "You win! Scissor beats Paper!"
-                            : (playerSelection === "SCISSOR" && computerChoice === "ROCK") ? gameResult = "You lose! Rock beats Scissor!"
-                                : "Oops, something went wrong."
-}
-*/
-
-/*
-keeping score
-if gameresult = you win > score player + 1 
-if gameresult = you lose > score computer + 1 
-
-
-if player score hoger dan score computer "YOU WIN"
-if player score lager dan score computer "YOU LOSE"
-*/
+/* The game itself */
 
 function game() {
     getComputerChoice();
@@ -82,19 +83,17 @@ function game() {
     getInputPlayer();
     console.log(playerSelection);
     playRound();
-    console.log(playRound(gameResult));
+    console.log(gameResult);
     console.log(playerScore);
+    console.log(computerScore);
 }
 
-
-
-/* Loop round 5 times */
+/* Loop round 3 times */
 let i = 0;
 
 do {
     game();
-    i++;
-    playerScore++;
+    ++i;
 }
-while (i < 5);
+while (i < 3);
 
