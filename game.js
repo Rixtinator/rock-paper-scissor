@@ -9,12 +9,33 @@ when 3 return scissors
 */
 
 let randomNumber = 0;
+let computerChoice = "";
 
 function getRandomNumber() {
     return randomNumber = Math.floor(Math.random() * 3) + 1;
 }
 
-getRandomNumber();
+function getComputerChoice() {
+    getRandomNumber();
+    if (randomNumber === 1) {
+        return computerChoice = 'Rock';
+    }
+    else if (randomNumber === 2) {
+        return computerChoice = "Paper";
+    }
+    else if (randomNumber === 3) {
+        return computerChoice = "Scissors";
+    }
+    else {
+        return computerChoice = "Something went wrong.";
+    }
+}
+
+
+getComputerChoice();
+console.log(randomNumber);
+console.log(computerChoice);
+
 
 /*function getComputerChoice() {
 }*/
