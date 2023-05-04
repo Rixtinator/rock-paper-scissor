@@ -21,8 +21,13 @@ console.log(computerChoice);
 
 /* Get input from player */
 
-let playerSelection = prompt("What do you choose?");
-playerSelection = playerSelection.toUpperCase();
+let playerSelection = "";
+
+function getInputPlayer() {
+    playerSelection = prompt("What do you choose?");
+    playerSelection = playerSelection.toUpperCase();
+    return playerSelection;
+}
 
 console.log(playerSelection);
 
@@ -41,4 +46,16 @@ function playRound() {
                                 : "Oops, something went wrong."
 }
 
-console.log(playRound(gameResult));
+let i = 0;
+
+function game() {
+    getInputPlayer();
+    playRound();
+    console.log(playRound(gameResult));
+}
+
+do {
+    game();
+    i++;
+}
+while (i < 5);
