@@ -78,7 +78,7 @@ function playRound() {
 /* Play the game until the player or the computer has 3 points */
 
 function game() {
-    do {
+    while (playerScore < 3 && computerScore < 3) {
         getComputerChoice();
         getInputPlayer();
         playRound();
@@ -86,7 +86,6 @@ function game() {
         console.log('Your score is' + ' ' + playerScore);
         console.log('The computer\'s score is' + ' ' + computerScore);
     }
-    while (playerScore < 3 && computerScore < 3);
 
     /* Letting the user know who won the competition. */
 
