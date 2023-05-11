@@ -24,9 +24,6 @@ function playerSelection() {
     playerSelection = this.id;
     playRound();
     hoverStay();
-    console.log(gameResult);
-    console.log(playerScore);
-    console.log(computerScore);
 }
 
 function hoverStay() {
@@ -115,6 +112,8 @@ pScoreComputer.classList.add("score-computer");
 function showScore() {
     scoreContainer.appendChild(pScorePlayer);
     scoreContainer.appendChild(pScoreComputer);
+    pScorePlayer.innerText = `Your score: ${playerScore}`;
+    pScoreComputer.innerText = `Computers Score: ${computerScore}`;
 }
 
 /* A single round of Rock, paper, scissors." */
@@ -123,8 +122,6 @@ function playRound() {
     combat();
     showComputerChoice();
     showScore();
-    pScorePlayer.innerText = `Your score: ${playerScore}`;
-    pScoreComputer.innerText = `Computers Score: ${computerScore}`;
 }
 
 let gameResult = "";
@@ -132,48 +129,46 @@ let gameResult = "";
 function combat() {
     getComputerChoice();
     if (playerSelection === computerChoice) {
-        console.log(computerChoice);
         gameResult = "You choose the same, try again.";
     }
     else if (playerSelection === "rock" && computerChoice === "paper") {
         console.log(computerChoice);
-        ++computerScore;
         gameResult = "You lose! Paper wraps around rock.";
     }
     else if (playerSelection === "rock" && computerChoice === "scissors") {
-        console.log(computerChoice);
         ++playerScore;
         gameResult = "You win! Rock crushes scissors.";
     }
     else if (playerSelection === "paper" && computerChoice === "rock") {
-        console.log(computerChoice);
         ++playerScore;
         gameResult = "You win! Paper wraps around rock.";
     }
     else if (playerSelection === "paper" && computerChoice === "scissors") {
-        console.log(computerChoice);
         ++computerScore;
         gameResult = "You lose! Scissors cuts paper.";
     }
     else if (playerSelection === "scissors" && computerChoice === "paper") {
-        console.log(computerChoice);
         ++playerScore;
         gameResult = "You win! Scissors cuts paper.";
     }
     else if (playerSelection === "scissors" && computerChoice === "rock") {
-        console.log(computerChoice);
         ++computerScore;
         gameResult = "You lose! Rock crushes scissors!";
     }
     else {
-        console.log(computerChoice);
         gameResult = "Please make a choice between rock, paper or scissors.";
     }
+    checkScore();
     return gameResult;
 }
 
-
-
 /* Play the game until the player or the computer has 3 points */
 
-
+function checkScore() {
+    if (computerScore >= 3) {
+        alert("YOU LOST");
+    }
+    else if (playerScore >= 3) {
+        alert("YOU WON!");
+    }
+}

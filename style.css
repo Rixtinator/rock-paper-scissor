@@ -67,9 +67,11 @@ img, .button {
 
 .score-player {
     text-align: left;
+    font-weight: bold;
 }
 
 .score-computer {
     text-align: right;
+    font-weight: bold;
 }
 
