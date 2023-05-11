@@ -50,6 +50,7 @@ img {
     flex: auto; 
     width: 180px;
     margin: 0;
+    padding: 15px;
 }
 
 .p-choice {
