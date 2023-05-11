@@ -32,10 +32,6 @@ function playerSelection() {
 
 const resultsContainer = document.getElementById("results");
 
-const pChoice = document.createElement("p");
-pChoice.innerText = "The computer chose:";
-resultsContainer.appendChild(pChoice);
-
 const imgRock = document.createElement("img");
 imgRock.src = "img/img-rock.png";
 
@@ -45,7 +41,21 @@ imgPaper.src = "img/img-paper.png";
 const imgScissors = document.createElement("img");
 imgScissors.src = "img/img-scissor.png";
 
+const pResult = document.createElement("p");
+pResult.classList.add("p-results");
+pResult.innerText = "You won or you lost, I don't know."
+
+const pChoice = document.createElement("p");
+pChoice.classList.add("p-choice");
+pChoice.innerText = "The computer chose:";
+
 function showComputerChoice() {
+    resultsContainer.appendChild(pChoice);
+    showImage();
+    resultsContainer.appendChild(pResult);
+}
+
+function showImage() {
     if (computerChoice === "rock") {
         resultsContainer.appendChild(imgRock);
         imgPaper.remove();
@@ -62,10 +72,6 @@ function showComputerChoice() {
         imgRock.remove();
     }
 }
-
-const pResult = document.createElement("p");
-pResult.innerText = "You won or you lost, I don't know."
-resultsContainer.appendChild(pResult);
 
 /* Adding score to player or computer." */
 

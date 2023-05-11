@@ -17,14 +17,15 @@ p {
     margin: 40px;
 }
 
+img {
+    width: 180px;
+    height: 180px;
+}
+
 .rps-buttons {
     display: flex;
     justify-content: space-around;
     margin-top: 80px;
-}
-
-.button img {
-    width: 180px;
 }
 
 .button :hover {
@@ -32,3 +33,20 @@ p {
     scale: 1.02;
 }
 
+#results {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.p-results {
+    flex: auto; 
+    width: 180px;
+    margin: 0;
+}
+
+.p-choice {
+    flex: auto; 
+    width: 180px;
+    margin: 0px;
+}
