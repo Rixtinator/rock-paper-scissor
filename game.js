@@ -28,16 +28,44 @@ function playerSelection() {
     console.log(computerScore);
 }
 
-/*
-Show result (computer choice and who won the round)
-adding text 'The computer choose: -choice-'
-adding img matching the computers choice
-adding tekst 'you won this round or the computer won this round' (gameResult?)
-*/
+/* Show result (computer choice and who won the round)*/
 
-function showResult() {
+const resultsContainer = document.getElementById("results");
 
+const pChoice = document.createElement("p");
+pChoice.innerText = "The computer chose:";
+resultsContainer.appendChild(pChoice);
+
+const imgRock = document.createElement("img");
+imgRock.src = "img/img-rock.png";
+
+const imgPaper = document.createElement("img");
+imgPaper.src = "img/img-paper.png";
+
+const imgScissors = document.createElement("img");
+imgScissors.src = "img/img-scissor.png";
+
+function showComputerChoice() {
+    if (computerChoice === "rock") {
+        resultsContainer.appendChild(imgRock);
+        imgPaper.remove();
+        imgScissors.remove();
+    }
+    if (computerChoice === "paper") {
+        resultsContainer.appendChild(imgPaper);
+        imgRock.remove();
+        imgScissors.remove();
+    }
+    if (computerChoice === "scissors") {
+        resultsContainer.appendChild(imgScissors);
+        imgPaper.remove();
+        imgRock.remove();
+    }
 }
+
+const pResult = document.createElement("p");
+pResult.innerText = "You won or you lost, I don't know."
+resultsContainer.appendChild(pResult);
 
 /* Adding score to player or computer." */
 
@@ -58,6 +86,7 @@ let gameResult = "";
 
 function playRound() {
     getComputerChoice();
+    showComputerChoice();
     if (playerSelection === computerChoice) {
         console.log(computerChoice);
         return gameResult = "You choose the same.";
