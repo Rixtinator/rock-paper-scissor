@@ -77,24 +77,4 @@ function playRound() {
 
 /* Play the game until the player or the computer has 3 points */
 
-function game() {
-    while (playerScore < 3 && computerScore < 3) {
-        getComputerChoice();
-        getInputPlayer();
-        playRound();
-        console.log(gameResult);
-        console.log('Your score is' + ' ' + playerScore);
-        console.log('The computer\'s score is' + ' ' + computerScore);
-    }
-
-    /* Letting the user know who won the competition. */
-
-    if (playerScore === 3) {
-        console.log("YEAH YEAH YOU WON, I wish I could give you a confetti party on your screen but I still need to learn that.")
-    }
-    else if (computerScore === 3) {
-        console.log("OH DAMN YOU LOSE, that's sad")
-    }
-}
-
 
