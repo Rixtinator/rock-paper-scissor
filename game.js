@@ -33,12 +33,15 @@ function playerSelection() {
 const resultsContainer = document.getElementById("results");
 
 const imgRock = document.createElement("img");
+imgRock.classList.add("imgChoice");
 imgRock.src = "img/img-rock.png";
 
 const imgPaper = document.createElement("img");
+imgPaper.classList.add("imgChoice");
 imgPaper.src = "img/img-paper.png";
 
 const imgScissors = document.createElement("img");
+imgScissors.classList.add("imgChoice");
 imgScissors.src = "img/img-scissor.png";
 
 const pResult = document.createElement("p");
@@ -73,6 +76,21 @@ function showImage() {
     }
 }
 
+const scoreContainer = document.getElementById("score");
+
+const pScorePlayer = document.createElement("p");
+pScorePlayer.classList.add("score-player");
+pScorePlayer.innerText = `Your Score: `;
+
+const pScoreComputer = document.createElement("p");
+pScoreComputer.classList.add("score-computer");
+pScoreComputer.innerText = `Computers Score: `;
+
+function showScore() {
+    scoreContainer.appendChild(pScorePlayer);
+    scoreContainer.appendChild(pScoreComputer);
+}
+
 /* Adding score to player or computer." */
 
 let playerScore = 0;
@@ -93,6 +111,7 @@ let gameResult = "";
 function playRound() {
     getComputerChoice();
     showComputerChoice();
+    showScore();
     if (playerSelection === computerChoice) {
         console.log(computerChoice);
         return gameResult = "You choose the same.";

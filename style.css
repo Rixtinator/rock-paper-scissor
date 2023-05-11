@@ -19,7 +19,6 @@ p {
 
 img {
     width: 180px;
-    height: 180px;
 }
 
 .rps-buttons {
@@ -39,6 +38,14 @@ img {
     margin-top: 50px;
 }
 
+#score {
+    display: flex;
+}
+
+#score p {
+    flex: auto; 
+}
+
 .p-results {
     flex: auto; 
     width: 180px;
@@ -50,3 +57,17 @@ img {
     width: 180px;
     margin: 0px;
 }
+
+.imgChoice {
+    width: 150px;
+    height: 150px;
+}
+
+.score-player {
+    text-align: left;
+}
+
+.score-computer {
+    text-align: right;
+}
+
