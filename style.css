@@ -29,6 +29,6 @@ p {
 
 .button :hover {
     box-shadow: 2px 2px 5px grey;
-    scale: 101%;
+    scale: 1.02;
 }
 
