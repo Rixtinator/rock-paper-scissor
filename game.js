@@ -23,9 +23,32 @@ buttons.forEach(button => button.addEventListener("click", playerSelection));
 function playerSelection() {
     playerSelection = this.id;
     playRound();
+    hoverStay();
     console.log(gameResult);
     console.log(playerScore);
     console.log(computerScore);
+}
+
+function hoverStay() {
+    const hoverRock = document.getElementById("rock");
+    const hoverPaper = document.getElementById("paper");
+    const hoverScissors = document.getElementById("scissors");
+    if (playerSelection === "rock") {
+        hoverRock.classList.add("hover-stay");
+        hoverPaper.classList.remove("hover-stay");
+        hoverScissors.classList.remove("hover-stay");
+    }
+    if (playerSelection === "paper") {
+        hoverPaper.classList.add("hover-stay");
+        hoverRock.classList.remove("hover-stay");
+        hoverScissors.classList.remove("hover-stay");
+    }
+    if (playerSelection === "scissors") {
+        hoverScissors.classList.add("hover-stay");
+        hoverRock.classList.remove("hover-stay");
+        hoverPaper.classList.remove("hover-stay");
+    }
+
 }
 
 /* Show result (computer choice and who won the round)*/
@@ -57,9 +80,6 @@ function showComputerChoice() {
     resultsContainer.appendChild(pResult);
     pResult.innerText = gameResult;
 }
-
-
-
 
 function showImage() {
     if (computerChoice === "rock") {
@@ -109,13 +129,13 @@ function showScore() {
 
 /* A single round of Rock, paper, scissors." */
 
-let gameResult = "";
-
 function playRound() {
     combat();
     showComputerChoice();
     showScore();
 }
+
+let gameResult = "";
 
 function combat() {
     getComputerChoice();

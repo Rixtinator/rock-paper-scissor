@@ -17,8 +17,9 @@ p {
     margin: 40px;
 }
 
-img {
+img, .button {
     width: 180px;
+    height: 180px;
 }
 
 .rps-buttons {
@@ -27,7 +28,7 @@ img {
     margin-top: 80px;
 }
 
-.button :hover {
+.button :hover, .hover-stay  {
     box-shadow: 2px 2px 5px grey;
     scale: 1.02;
 }
