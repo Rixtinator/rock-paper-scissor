@@ -14,11 +14,20 @@
     <p>Who will be the first to have three points?</p>
 
     <div class="rps-buttons"> 
-        <div class="button rock"><img src="img/img-rock.png"></div>
-        <div class="button paper"><img src="img/img-paper.png"></div>
-        <div class="button scissors"><img src="img/img-scissor.png"></div>
+        <div class="button" id="rock"><img src="img/img-rock.png"></div>
+        <div class="button" id="paper"><img src="img/img-paper.png"></div>
+        <div class="button" id="scissors"><img src="img/img-scissor.png"></div>
     </div>
     
 </body>
+<script>
 
+    const elements = document.querySelectorAll(".button"); 
+    elements.forEach(element => element.addEventListener("click", getPlayerInput));
+
+function getPlayerInput() {
+console.log(this.id)
+}
+
+</script>
 </html>

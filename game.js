@@ -25,17 +25,7 @@ function getInputPlayer() {
     return playerSelection;
 }*/
 
-const element = document.getElementsByClassName("button");
-console.log(element);
-console.log(element.length);
 
-for (var i = 0; i < element.length; i++) {
-    element[i].addEventListener("click", getPlayerInput);
-}
-
-function getPlayerInput() {
-    console.log();
-}
 /* Adding score to player or computer." */
 
 let playerScore = 0;
