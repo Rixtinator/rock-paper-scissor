@@ -81,10 +81,7 @@ img, .button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-#lost {
-    align-items: center;
+    padding-bottom: 100px;
 }
 
 #game-end p {
@@ -92,5 +89,5 @@ img, .button {
 }
 
 .btn-try-again {
-    width: 100px;
+    width: 80px;
 }

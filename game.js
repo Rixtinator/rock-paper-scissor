@@ -21,9 +21,15 @@ const buttons = document.querySelectorAll(".button");
 buttons.forEach(button => button.addEventListener("click", playerSelection));
 
 function playerSelection() {
-    playerSelection = this.id;
-    playRound();
-    hoverStay();
+    if (computerScore < 3 && playerScore < 3) {
+        playerSelection = this.id;
+        playRound();
+        hoverStay();
+    }
+    else {
+        return;
+    }
+
 }
 
 function hoverStay() {
@@ -133,7 +139,6 @@ function combat() {
         gameResult = "You choose the same, try again.";
     }
     else if (playerSelection === "rock" && computerChoice === "paper") {
-        console.log(computerChoice);
         gameResult = "You lose! Paper wraps around rock.";
     }
     else if (playerSelection === "rock" && computerChoice === "scissors") {
@@ -170,12 +175,30 @@ document.getElementById("lost").style.display = "none";
 
 function checkScore() {
     if (computerScore >= 3) {
-        console.log("YOU LOST");
         document.getElementById("lost").style.display = "flex";
     }
     else if (playerScore >= 3) {
-        console.log("YOU WON");
         document.getElementById("won").style.display = "flex";
     }
 }
 
+const btnTryAgain = document.querySelectorAll(".btn-try-again");
+btnTryAgain.forEach(button => button.addEventListener("click", tryAgain));
+
+function tryAgain() {
+    computerScore = 0;
+    playerScore = 0;
+    showScore();
+    document.getElementById("won").style.display = "none";
+    document.getElementById("lost").style.display = "none";
+    deleteChoice();
+}
+
+function deleteChoice() {
+    const hoverRock = document.getElementById("rock");
+    const hoverPaper = document.getElementById("paper");
+    const hoverScissors = document.getElementById("scissors");
+    hoverRock.classList.remove("hover-stay");
+    hoverScissors.classList.remove("hover-stay");
+    hoverPaper.classList.remove("hover-stay");
+}
