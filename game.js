@@ -122,6 +122,7 @@ function playRound() {
     combat();
     showComputerChoice();
     showScore();
+    checkScore();
 }
 
 let gameResult = "";
@@ -158,17 +159,23 @@ function combat() {
     else {
         gameResult = "Please make a choice between rock, paper or scissors.";
     }
-    checkScore();
     return gameResult;
 }
 
 /* Play the game until the player or the computer has 3 points */
 
+document.getElementById("won").style.display = "none";
+document.getElementById("lost").style.display = "none";
+
+
 function checkScore() {
     if (computerScore >= 3) {
-        alert("YOU LOST");
+        console.log("YOU LOST");
+        document.getElementById("lost").style.display = "flex";
     }
     else if (playerScore >= 3) {
-        alert("YOU WON!");
+        console.log("YOU WON");
+        document.getElementById("won").style.display = "flex";
     }
 }
+

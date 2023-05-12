@@ -75,3 +75,22 @@ img, .button {
     font-weight: bold;
 }
 
+.try-again {
+    flex: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#lost {
+    align-items: center;
+}
+
+#game-end p {
+    font-weight: bold;
+}
+
+.btn-try-again {
+    width: 100px;
+}
