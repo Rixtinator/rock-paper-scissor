@@ -28,7 +28,7 @@ img, .button {
     margin-top: 80px;
 }
 
-.button :hover, .hover-stay  {
+.button :hover, .hover-stay, .btn-try-again:hover {
     box-shadow: 2px 2px 5px grey;
     scale: 1.02;
 }
@@ -89,5 +89,10 @@ img, .button {
 }
 
 .btn-try-again {
-    width: 80px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #F8F3EE;
+    border: solid #C74C36;
+    outline: solid #F8F3EE 3px;
+    /*box-shadow:0 0 0 0px white, 0 0 0 4px #F8F3EE;*/ 
 }
