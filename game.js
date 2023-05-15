@@ -1,4 +1,3 @@
-/* A function called getComputerChoice that will randomly return either 'rock', ‘paper’ or ‘scissors’. */
 
 let randomNumber = 0;
 let computerChoice = "";
@@ -15,21 +14,22 @@ function getComputerChoice() {
                 : computerChoice = "Oops, something went wrong."
 }
 
-/* Get input from player */
-
 const buttons = document.querySelectorAll(".button");
-buttons.forEach(button => button.addEventListener("click", playerSelection));
+buttons.forEach(button => button.addEventListener("click", playGame));
 
-function playerSelection() {
+function playGame() {
     if (computerScore < 3 && playerScore < 3) {
         playerSelection = this.id;
         playRound();
         hoverStay();
     }
-    else {
-        return;
-    }
+}
 
+function playRound() {
+    combat();
+    showComputerChoice();
+    showScore();
+    checkScore();
 }
 
 function hoverStay() {
@@ -41,20 +41,18 @@ function hoverStay() {
         hoverPaper.classList.remove("hover-stay");
         hoverScissors.classList.remove("hover-stay");
     }
-    if (playerSelection === "paper") {
+    else if (playerSelection === "paper") {
         hoverPaper.classList.add("hover-stay");
         hoverRock.classList.remove("hover-stay");
         hoverScissors.classList.remove("hover-stay");
     }
-    if (playerSelection === "scissors") {
+    else if (playerSelection === "scissors") {
         hoverScissors.classList.add("hover-stay");
         hoverRock.classList.remove("hover-stay");
         hoverPaper.classList.remove("hover-stay");
     }
 
 }
-
-/* Show result (computer choice and who won the round)*/
 
 const resultsContainer = document.getElementById("results");
 
@@ -102,8 +100,6 @@ function showImage() {
     }
 }
 
-/* Adding score to player or computer." */
-
 let playerScore = 0;
 let computerScore = 0;
 
@@ -120,15 +116,6 @@ function showScore() {
     scoreContainer.appendChild(pScoreComputer);
     pScorePlayer.innerText = `Your score: ${playerScore}`;
     pScoreComputer.innerText = `Computers Score: ${computerScore}`;
-}
-
-/* A single round of Rock, paper, scissors." */
-
-function playRound() {
-    combat();
-    showComputerChoice();
-    showScore();
-    checkScore();
 }
 
 let gameResult = "";
@@ -167,11 +154,9 @@ function combat() {
     return gameResult;
 }
 
-/* Play the game until the player or the computer has 3 points */
-
+/* Hides won & lost classes until game ends */
 document.getElementById("won").style.display = "none";
 document.getElementById("lost").style.display = "none";
-
 
 function checkScore() {
     if (computerScore >= 3) {
