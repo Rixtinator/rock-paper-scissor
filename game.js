@@ -15,51 +15,63 @@ const options = {
 const buttons = document.querySelectorAll(".button");
 buttons.forEach(button => button.addEventListener("click", getPlayerData));
 
+function isGameReady() {
+    if (computerScore < 3 && playerScore < 3) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 let playerData = 0;
 let playerScore = 0;
 let computerScore = 0;
 let message = "";
 
 function getPlayerData() {
-    getComputerChoice();
-    console.log(options.gameOptions[computerChoice - 1].name);
+    if (isGameReady()) {
+        getComputerChoice();
+        hoverStay();
+        playerData = Number(this.dataset.id);
 
-    playerData = Number(this.dataset.id);
+        function getPlayerObject(playerData, options) {
+            let playerChoiceObject = options.gameOptions.find(obj => {
+                return obj.id === playerData;
+            });
+            return playerChoiceObject;
+        }
 
-    function getPlayerObject(playerData, options) {
-        let playerChoiceObject = options.gameOptions.find(obj => {
-            return obj.id === playerData;
-        });
-        return playerChoiceObject;
-    }
-
-    const playerSelection = getPlayerObject(playerData, options);
-    console.log(playerSelection.beats.includes(computerChoice));
-    if (playerSelection.beats.includes(computerChoice)) {
-        message = playerSelection.beatsMsg;
-        showComputerChoice();
-        playerWinsRound();
-    }
-    else if (playerSelection.loses.includes(computerChoice)) {
-        message = playerSelection.losesMsg;
-        showComputerChoice();
-        computerWinsRound();
-    }
-    else {
-        message = "You chose the same.";
-        showComputerChoice();
-        showScore();
+        const playerSelection = getPlayerObject(playerData, options);
+        if (playerSelection.beats.includes(computerChoice)) {
+            message = playerSelection.beatsMsg;
+            showComputerChoice();
+            playerWinsRound();
+        }
+        else if (playerSelection.loses.includes(computerChoice)) {
+            message = playerSelection.losesMsg;
+            showComputerChoice();
+            computerWinsRound();
+        }
+        else {
+            message = "You chose the same.";
+            showComputerChoice();
+            showScore();
+            checkScore();
+        }
     }
 }
 
 function playerWinsRound() {
     ++playerScore;
     showScore();
+    checkScore();
 }
 
 function computerWinsRound() {
     ++computerScore;
     showScore();
+    checkScore();
 }
 
 const resultsContainer = document.getElementById("results");
@@ -125,192 +137,57 @@ function showScore() {
     pScoreComputer.innerText = `Computers Score: ${computerScore}`;
 }
 
+function hoverStay() {
+    const hoverRock = document.getElementById("rock");
+    const hoverPaper = document.getElementById("paper");
+    const hoverScissors = document.getElementById("scissors");
+    if (playerData === 1) {
+        hoverRock.classList.add("hover-stay");
+        hoverPaper.classList.remove("hover-stay");
+        hoverScissors.classList.remove("hover-stay");
+    }
+    else if (playerData === 2) {
+        hoverPaper.classList.add("hover-stay");
+        hoverRock.classList.remove("hover-stay");
+        hoverScissors.classList.remove("hover-stay");
+    }
+    else if (playerData === 3) {
+        hoverScissors.classList.add("hover-stay");
+        hoverRock.classList.remove("hover-stay");
+        hoverPaper.classList.remove("hover-stay");
+    }
+}
+
 /* Hides won & lost classes until game ends */
 document.getElementById("won").style.display = "none";
 document.getElementById("lost").style.display = "none";
 
+function checkScore() {
+    if (computerScore >= 3) {
+        document.getElementById("lost").style.display = "flex";
+    }
+    else if (playerScore >= 3) {
+        document.getElementById("won").style.display = "flex";
+    }
+}
 
+const btnTryAgain = document.querySelectorAll(".btn-try-again");
+btnTryAgain.forEach(button => button.addEventListener("click", tryAgain));
 
-// const buttons = document.querySelectorAll(".button");
-// buttons.forEach(button => button.addEventListener("click", playGame));
+function tryAgain() {
+    computerScore = 0;
+    playerScore = 0;
+    showScore();
+    document.getElementById("won").style.display = "none";
+    document.getElementById("lost").style.display = "none";
+    deleteChoice();
+}
 
-// function playGame() {
-//     if (computerScore < 3 && playerScore < 3) {
-//         playerSelection = this.id;
-//         playerData = Number(this.dataset.id);
-
-//         let playerChoiceObject = options.gameOptions.filter(obj => {
-//             return obj.id === playerData;
-//         });
-//         return playerChoiceObject;
-//     }
-
-//     console.log(playerChoiceObject);
-
-//     playRound();
-//     hoverStay();
-// }
-
-
-// function playRound() {
-//     combat();
-//     showComputerChoice();
-//     showScore();
-//     checkScore();
-// }
-
-// function hoverStay() {
-//     const hoverRock = document.getElementById("rock");
-//     const hoverPaper = document.getElementById("paper");
-//     const hoverScissors = document.getElementById("scissors");
-//     if (playerSelection === "rock") {
-//         hoverRock.classList.add("hover-stay");
-//         hoverPaper.classList.remove("hover-stay");
-//         hoverScissors.classList.remove("hover-stay");
-//     }
-//     else if (playerSelection === "paper") {
-//         hoverPaper.classList.add("hover-stay");
-//         hoverRock.classList.remove("hover-stay");
-//         hoverScissors.classList.remove("hover-stay");
-//     }
-//     else if (playerSelection === "scissors") {
-//         hoverScissors.classList.add("hover-stay");
-//         hoverRock.classList.remove("hover-stay");
-//         hoverPaper.classList.remove("hover-stay");
-//     }
-
-// }
-
-// const resultsContainer = document.getElementById("results");
-
-// const imgRock = document.createElement("img");
-// imgRock.classList.add("imgChoice");
-// imgRock.src = "img/img-rock.png";
-
-// const imgPaper = document.createElement("img");
-// imgPaper.classList.add("imgChoice");
-// imgPaper.src = "img/img-paper.png";
-
-// const imgScissors = document.createElement("img");
-// imgScissors.classList.add("imgChoice");
-// imgScissors.src = "img/img-scissor.png";
-
-// const pResult = document.createElement("p");
-// pResult.classList.add("p-results");
-
-// const pChoice = document.createElement("p");
-// pChoice.classList.add("p-choice");
-// pChoice.innerText = "The computer chose:";
-
-// function showComputerChoice() {
-//     resultsContainer.appendChild(pChoice);
-//     showImage();
-//     resultsContainer.appendChild(pResult);
-//     pResult.innerText = gameResult;
-// }
-
-// function showImage() {
-//     if (computerChoice === "rock") {
-//         resultsContainer.appendChild(imgRock);
-//         imgPaper.remove();
-//         imgScissors.remove();
-//     }
-//     if (computerChoice === "paper") {
-//         resultsContainer.appendChild(imgPaper);
-//         imgRock.remove();
-//         imgScissors.remove();
-//     }
-//     if (computerChoice === "scissors") {
-//         resultsContainer.appendChild(imgScissors);
-//         imgPaper.remove();
-//         imgRock.remove();
-//     }
-// }
-
-// let playerScore = 0;
-// let computerScore = 0;
-
-// const scoreContainer = document.getElementById("score");
-
-// const pScorePlayer = document.createElement("p");
-// pScorePlayer.classList.add("score-player");
-
-// const pScoreComputer = document.createElement("p");
-// pScoreComputer.classList.add("score-computer");
-
-// function showScore() {
-//     scoreContainer.appendChild(pScorePlayer);
-//     scoreContainer.appendChild(pScoreComputer);
-//     pScorePlayer.innerText = `Your score: ${playerScore}`;
-//     pScoreComputer.innerText = `Computers Score: ${computerScore}`;
-// }
-
-// let gameResult = "";
-
-// function combat() {
-//     getComputerChoice();
-//     if (playerSelection === computerChoice) {
-//         gameResult = "You choose the same, try again.";
-//     }
-//     else if (playerSelection === "rock" && computerChoice === "paper") {
-//         gameResult = "You lose! Paper wraps around rock.";
-//     }
-//     else if (playerSelection === "rock" && computerChoice === "scissors") {
-//         ++playerScore;
-//         gameResult = "You win! Rock crushes scissors.";
-//     }
-//     else if (playerSelection === "paper" && computerChoice === "rock") {
-//         ++playerScore;
-//         gameResult = "You win! Paper wraps around rock.";
-//     }
-//     else if (playerSelection === "paper" && computerChoice === "scissors") {
-//         ++computerScore;
-//         gameResult = "You lose! Scissors cuts paper.";
-//     }
-//     else if (playerSelection === "scissors" && computerChoice === "paper") {
-//         ++playerScore;
-//         gameResult = "You win! Scissors cuts paper.";
-//     }
-//     else if (playerSelection === "scissors" && computerChoice === "rock") {
-//         ++computerScore;
-//         gameResult = "You lose! Rock crushes scissors!";
-//     }
-//     else {
-//         gameResult = "Please make a choice between rock, paper or scissors.";
-//     }
-//     return gameResult;
-// }
-
-// /* Hides won & lost classes until game ends */
-// document.getElementById("won").style.display = "none";
-// document.getElementById("lost").style.display = "none";
-
-// function checkScore() {
-//     if (computerScore >= 3) {
-//         document.getElementById("lost").style.display = "flex";
-//     }
-//     else if (playerScore >= 3) {
-//         document.getElementById("won").style.display = "flex";
-//     }
-// }
-
-// const btnTryAgain = document.querySelectorAll(".btn-try-again");
-// btnTryAgain.forEach(button => button.addEventListener("click", tryAgain));
-
-// function tryAgain() {
-//     computerScore = 0;
-//     playerScore = 0;
-//     showScore();
-//     document.getElementById("won").style.display = "none";
-//     document.getElementById("lost").style.display = "none";
-//     deleteChoice();
-// }
-
-// function deleteChoice() {
-//     const hoverRock = document.getElementById("rock");
-//     const hoverPaper = document.getElementById("paper");
-//     const hoverScissors = document.getElementById("scissors");
-//     hoverRock.classList.remove("hover-stay");
-//     hoverScissors.classList.remove("hover-stay");
-//     hoverPaper.classList.remove("hover-stay");
-// }
+function deleteChoice() {
+    const hoverRock = document.getElementById("rock");
+    const hoverPaper = document.getElementById("paper");
+    const hoverScissors = document.getElementById("scissors");
+    hoverRock.classList.remove("hover-stay");
+    hoverScissors.classList.remove("hover-stay");
+    hoverPaper.classList.remove("hover-stay");
+}
