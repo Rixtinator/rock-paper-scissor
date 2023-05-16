@@ -12,39 +12,66 @@ const options = {
     ]
 }
 
-getComputerChoice();
-console.log(computerChoice - 1);
-console.log(options.gameOptions[computerChoice - 1].name);
-
 const buttons = document.querySelectorAll(".button");
 buttons.forEach(button => button.addEventListener("click", getPlayerData));
 
 let playerData = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 function getPlayerData() {
+    getComputerChoice();
+    console.log(options.gameOptions[computerChoice - 1].name);
+
     playerData = Number(this.dataset.id);
 
     function getPlayerObject(playerData, options) {
         let playerChoiceObject = options.gameOptions.find(obj => {
             return obj.id === playerData;
         });
-        //console.log(playerChoiceObject); //this gives the right object
         return playerChoiceObject;
     }
 
     const playerSelection = getPlayerObject(playerData, options);
     console.log(playerSelection.beats.includes(computerChoice));
     if (playerSelection.beats.includes(computerChoice)) {
-        console.log(playerSelection.beatsMsg);
+        playerWinsRound();
+        console.log(playerSelection.beatsMsg); //add function beats
     }
     else if (playerSelection.loses.includes(computerChoice)) {
-        console.log(playerSelection.losesMsg);
+        computerWinsRound();
+        console.log(playerSelection.losesMsg); //add function loses
     }
     else {
-        console.log("You chose the same.")
+        showScore();
+        console.log("You chose the same.") //add function same
     }
 }
 
+function playerWinsRound() {
+    ++playerScore;
+    showScore();
+}
+
+function computerWinsRound() {
+    ++computerScore;
+    showScore();
+}
+
+const scoreContainer = document.getElementById("score");
+
+const pScorePlayer = document.createElement("p");
+pScorePlayer.classList.add("score-player");
+
+const pScoreComputer = document.createElement("p");
+pScoreComputer.classList.add("score-computer");
+
+function showScore() {
+    scoreContainer.appendChild(pScorePlayer);
+    scoreContainer.appendChild(pScoreComputer);
+    pScorePlayer.innerText = `Your score: ${playerScore}`;
+    pScoreComputer.innerText = `Computers Score: ${computerScore}`;
+}
 
 
 
