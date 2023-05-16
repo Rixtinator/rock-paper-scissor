@@ -2,12 +2,20 @@
 let randomNumber = 0;
 let computerChoice = "";
 
+
+// wat als fire wordt toegevoegd?
+
+
 function getRandomNumber() {
     return randomNumber = Math.floor(Math.random() * 3) + 1;
 }
 
 function getComputerChoice() {
     getRandomNumber();
+
+    // case break
+
+    // alleen 1 ding returnen.
     return (randomNumber === 1) ? computerChoice = "rock"
         : (randomNumber === 2) ? computerChoice = "paper"
             : (randomNumber === 3) ? computerChoice = "scissors"
@@ -18,10 +26,71 @@ const buttons = document.querySelectorAll(".button");
 buttons.forEach(button => button.addEventListener("click", playGame));
 
 function playGame() {
+    // can we start function?
+    // can we start the game? isGameReady? 
+
+    // const setup = {
+    //     "hoi": [],
+    //     'rock': 1,
+    //     'paper': 2,
+    //     'scissor': 3,
+    //     'fire': 4
+    // };
+
+    // // array
+    // // indexed
+    // const array = [1, 2, 3, 4, 5];
+    // const name = "Tjerk";
+    // console.log(array[1]);
+    // console.log(name[2]);
+
+    // console.log(setup.fire);
+
+
     if (computerScore < 3 && playerScore < 3) {
         playerSelection = this.id;
+
+        playerData = Number(this.dataset.id)
+
+        // alles waar ik niet op heb geklikt moet geen schaduw hebben.
+        // alleen waar ik op heb geklikt moet een schaduw
+
         playRound();
         hoverStay();
+
+        const options = {
+            "gameOptions": [
+                { id: 1, name: "Rock", beats: [0, 2, 4], beatMsg: [{ id: 3, msg: "I beat spock" }] },
+                { id: 2, name: "Paper", beats: [0, 2, 4], beatMsg: [{ id: 3, msg: "I beat spock" }] },
+                { id: 3, name: "Scissor", beats: [0, 2, 4], beatMsg: [{ id: 3, msg: "I beat spock" }] },
+            ]
+        };
+
+
+
+
+
+        function getOptionObject(playerData, options) {
+
+
+            let thing = options.gameOptions.filter(obj => {
+                return obj.id === playerData;
+            });
+
+
+            return thing;
+        }
+
+        const playerSelection = getOptionObject(playerData, options);
+
+        // komt dit nummer oftwel id voor in deze array, ja laat dan die specifieke beatMSG zien (computer had x daarom verslagen)
+        playerSelection.beats.includes(computerChoice)
+
+
+        // player heeft de goeie dus dan beatmsg van de player
+
+
+
     }
 }
 
@@ -51,7 +120,6 @@ function hoverStay() {
         hoverRock.classList.remove("hover-stay");
         hoverPaper.classList.remove("hover-stay");
     }
-
 }
 
 const resultsContainer = document.getElementById("results");
@@ -122,6 +190,22 @@ let gameResult = "";
 
 function combat() {
     getComputerChoice();
+
+    const hoi = "Tjerk";
+
+    console.log(`${hoi} is cool`);
+
+
+
+    //console.log(options.gameOptions[0]);
+
+    // 1
+
+    // const chosenOption = [];
+    // const computerOption = [];
+
+
+
     if (playerSelection === computerChoice) {
         gameResult = "You choose the same, try again.";
     }
