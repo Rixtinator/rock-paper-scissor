@@ -18,6 +18,7 @@ buttons.forEach(button => button.addEventListener("click", getPlayerData));
 let playerData = 0;
 let playerScore = 0;
 let computerScore = 0;
+let message = "";
 
 function getPlayerData() {
     getComputerChoice();
@@ -35,16 +36,19 @@ function getPlayerData() {
     const playerSelection = getPlayerObject(playerData, options);
     console.log(playerSelection.beats.includes(computerChoice));
     if (playerSelection.beats.includes(computerChoice)) {
+        message = playerSelection.beatsMsg;
+        showComputerChoice();
         playerWinsRound();
-        console.log(playerSelection.beatsMsg); //add function beats
     }
     else if (playerSelection.loses.includes(computerChoice)) {
+        message = playerSelection.losesMsg;
+        showComputerChoice();
         computerWinsRound();
-        console.log(playerSelection.losesMsg); //add function loses
     }
     else {
+        message = "You chose the same.";
+        showComputerChoice();
         showScore();
-        console.log("You chose the same.") //add function same
     }
 }
 
@@ -57,6 +61,54 @@ function computerWinsRound() {
     ++computerScore;
     showScore();
 }
+
+const resultsContainer = document.getElementById("results");
+
+function showComputerChoice() {
+    resultsContainer.appendChild(pChoice);
+    showImage();
+    resultsContainer.appendChild(pResult);
+    pResult.innerText = message;
+}
+
+const imgRock = document.createElement("img");
+imgRock.classList.add("imgChoice");
+imgRock.src = "img/img-rock.png";
+
+const imgPaper = document.createElement("img");
+imgPaper.classList.add("imgChoice");
+imgPaper.src = "img/img-paper.png";
+
+const imgScissors = document.createElement("img");
+imgScissors.classList.add("imgChoice");
+imgScissors.src = "img/img-scissor.png";
+
+const pResult = document.createElement("p");
+pResult.classList.add("p-results");
+
+const pChoice = document.createElement("p");
+pChoice.classList.add("p-choice");
+pChoice.innerText = "The computer chose:";
+
+function showImage() {
+    if (computerChoice === 1) {
+        resultsContainer.appendChild(imgRock);
+        imgPaper.remove();
+        imgScissors.remove();
+    }
+    if (computerChoice === 2) {
+        resultsContainer.appendChild(imgPaper);
+        imgRock.remove();
+        imgScissors.remove();
+    }
+    if (computerChoice === 3) {
+        resultsContainer.appendChild(imgScissors);
+        imgPaper.remove();
+        imgRock.remove();
+    }
+}
+
+// SHOW SCORE 
 
 const scoreContainer = document.getElementById("score");
 
@@ -72,19 +124,6 @@ function showScore() {
     pScorePlayer.innerText = `Your score: ${playerScore}`;
     pScoreComputer.innerText = `Computers Score: ${computerScore}`;
 }
-
-
-
-// let playerChoiceObject = options.gameOptions.filter(obj => {
-//     return obj.id === playerData;
-// });
-// console.log(playerChoiceObject);
-// return playerChoiceObject;
-// }
-
-// const playerSelection = getPlayerData(playerData, options);
-// console.log(playerSelection);
-
 
 /* Hides won & lost classes until game ends */
 document.getElementById("won").style.display = "none";
