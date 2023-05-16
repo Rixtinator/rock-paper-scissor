@@ -6,16 +6,57 @@ function getComputerChoice() {
 
 const options = {
     "gameOptions": [
-        { id: 1, name: "rock", beats: 3, loses: 2, beatsMsg: "You win! Rock crushes scissors.", losesMsg: "You lose! Paper wraps around rock." },
-        { id: 2, name: "paper", beats: 1, loses: 3, beatsMsg: "You win! Paper wraps around rock.", losesMsg: "You lose! Scissors cuts paper." },
-        { id: 3, name: "scissors", beats: 2, loses: 1, beatsMsg: "You win! Scissors cuts paper.", losesMsg: "You lose! Rock crushes scissors!" },
+        { id: 1, name: "rock", beats: [3], loses: [2], beatsMsg: "You win! Rock crushes scissors.", losesMsg: "You lose! Paper wraps around rock." },
+        { id: 2, name: "paper", beats: [1], loses: [3], beatsMsg: "You win! Paper wraps around rock.", losesMsg: "You lose! Scissors cuts paper." },
+        { id: 3, name: "scissors", beats: [2], loses: [1], beatsMsg: "You win! Scissors cuts paper.", losesMsg: "You lose! Rock crushes scissors!" },
     ]
 }
 
 getComputerChoice();
-console.log(computerChoice);
-console.log(options.gameOptions[computerChoice]);
+console.log(computerChoice - 1);
+console.log(options.gameOptions[computerChoice - 1].name);
 
+const buttons = document.querySelectorAll(".button");
+buttons.forEach(button => button.addEventListener("click", getPlayerData));
+
+let playerData = 0;
+
+function getPlayerData() {
+    playerData = Number(this.dataset.id);
+
+    function getPlayerObject(playerData, options) {
+        let playerChoiceObject = options.gameOptions.find(obj => {
+            return obj.id === playerData;
+        });
+        //console.log(playerChoiceObject); //this gives the right object
+        return playerChoiceObject;
+    }
+
+    const playerSelection = getPlayerObject(playerData, options);
+    console.log(playerSelection.beats.includes(computerChoice));
+    if (playerSelection.beats.includes(computerChoice)) {
+        console.log(playerSelection.beatsMsg);
+    }
+    else if (playerSelection.loses.includes(computerChoice)) {
+        console.log(playerSelection.losesMsg);
+    }
+    else {
+        console.log("You chose the same.")
+    }
+}
+
+
+
+
+// let playerChoiceObject = options.gameOptions.filter(obj => {
+//     return obj.id === playerData;
+// });
+// console.log(playerChoiceObject);
+// return playerChoiceObject;
+// }
+
+// const playerSelection = getPlayerData(playerData, options);
+// console.log(playerSelection);
 
 
 /* Hides won & lost classes until game ends */
