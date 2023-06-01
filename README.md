@@ -1,4 +1,4 @@
 # rock-paper-scissor
 
-This is a rock-paper-scissor game, for now without UI. 
+This is a rock-paper-scissor game.
 From The Odin Project. 
